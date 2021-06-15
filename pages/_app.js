@@ -1,7 +1,13 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+
+import { CountProvider } from "../reducer/count";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <CountProvider>
+      <Component {...pageProps} />
+    </CountProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

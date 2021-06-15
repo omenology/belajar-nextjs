@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 import Link from "next/link";
-import { initialState, reducer } from "../../reducer/count";
+import { useCount } from "../../reducer/count";
 
 const Tes = (contex) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, dispatch } = useCount();
 
   return (
     <div>
