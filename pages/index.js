@@ -1,22 +1,33 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Link from "next/link";
-import { useCount } from "../reducer/count";
-import AppBar from "../components/appBar";
+import { useCount, asyncInc } from "../reducer/count";
+
+import Items from "../components/items";
+import Layout from "../components/layout";
 
 export default function Home() {
-  const { state, dispatch } = useCount();
+  const { state, increment } = useCount();
+  const { loading, setLoading } = React.useState(false);
+  const data = [
+    { name: "buku 1", description: "desc buku 1" },
+    { name: "buku 2", description: "desc buku 2" },
+    { name: "buku 3", description: "desc buku 3" },
+    { name: "buku 4", description: "desc buku 4" },
+    { name: "buku 5", description: "desc buku 5" },
+    { name: "buku 6", description: "desc buku 6" },
+  ];
   console.log(state);
   return (
-    <>
-      <AppBar />
+    <Layout>
+      <Items data={data} />
       <div>
         <h1>Count:{state.count}</h1>
-        <button onClick={() => dispatch({ type: "inc" })}>+</button>
-        <button onClick={() => dispatch({ type: "dec" })}>-</button>
+        <button onClick={() => increment()}>+</button>
+        <button onClick={() => console.log("minus")}>-</button>
         <Link href="/bar">
           <a>bar</a>
         </Link>
       </div>
-    </>
+    </Layout>
   );
 }

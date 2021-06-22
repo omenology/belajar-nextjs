@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 
-export const initialState = { count: 0 };
-export const reducer = (state, action) => {
+export const initialStateCounter = { count: 0 };
+export const reducerCounter = (state, action) => {
   switch (action.type) {
     case "inc":
       return { count: state.count + 1 };
@@ -12,11 +12,29 @@ export const reducer = (state, action) => {
   }
 };
 
+export const asyncInc = async (dispatch, payload) => {
+  console.log("click", dispatch);
+  try {
+    setTimeout(() => {
+      console.log("timeout");
+      dispatch({ type: "inc" });
+    }, 5000);
+  } catch (error) {
+    dispatch("faild");
+  }
+};
+
 const CountContext = createContext();
 
 export const CountProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { state, dispatch };
+  const [stateCounter, dispatchCounter] = useReducer(
+    reducerCounter,
+    initialStateCounter
+  );
+  const value = {
+    state: { counter: stateCounter },
+    dispatch: { counter: dispatchCounter },
+  };
 
   return (
     <CountContext.Provider value={value}>{children}</CountContext.Provider>
@@ -27,5 +45,8 @@ export const useCount = () => {
   const context = useContext(CountContext);
 
   if (context == undefined) throw new Error("context undefined");
-  return context;
+  return {
+    state: context.state.counter,
+    increment: (payload) => asyncInc(context.dispatch.counter),
+  };
 };
