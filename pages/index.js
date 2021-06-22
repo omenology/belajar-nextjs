@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { useCount, asyncInc } from "../reducer/count";
+import { useCount } from "../context/";
 
 import Items from "../components/items";
 import Layout from "../components/layout";
 
 export default function Home() {
-  const { state, increment } = useCount();
+  const { state, asyncIncrement, inc, dec } = useCount();
   const { loading, setLoading } = React.useState(false);
   const data = [
     { name: "buku 1", description: "desc buku 1" },
@@ -22,8 +22,8 @@ export default function Home() {
       <Items data={data} />
       <div>
         <h1>Count:{state.count}</h1>
-        <button onClick={() => increment()}>+</button>
-        <button onClick={() => console.log("minus")}>-</button>
+        <button onClick={() => inc()}>+</button>
+        <button onClick={() => dec()}>-</button>
         <Link href="/bar">
           <a>bar</a>
         </Link>

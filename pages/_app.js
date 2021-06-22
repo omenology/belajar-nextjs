@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 
-import { CountProvider } from "../reducer/count";
+import { GlobalProvider } from "../context";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <CountProvider>
+    <GlobalProvider>
       <Component {...pageProps} />
-    </CountProvider>
+    </GlobalProvider>
   );
 }
 
