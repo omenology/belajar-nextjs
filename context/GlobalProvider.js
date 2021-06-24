@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 
 import { reducerCounter, initialStateCounter } from "./reducer/counter";
+import { reducerLogin, initialStateLogin } from "./reducer/login";
 
 export const GlobalContext = createContext();
 
@@ -9,9 +10,14 @@ export const GlobalProvider = ({ children }) => {
     reducerCounter,
     initialStateCounter
   );
+  const [stateLogin, dispatchLogin] = useReducer(
+    reducerLogin,
+    initialStateLogin
+  );
+
   const value = {
-    state: { counter: stateCounter },
-    dispatch: { counter: dispatchCounter },
+    state: { counter: stateCounter, login: stateLogin },
+    dispatch: { counter: dispatchCounter, login: dispatchLogin },
   };
 
   return (

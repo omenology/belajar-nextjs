@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 
-import { Card, TextField, Button } from "@material-ui/core";
+import { Card, TextField, Button, CircularProgress } from "@material-ui/core";
 
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
@@ -70,6 +70,7 @@ const Login = (props) => {
                 style={{ marginTop: 25 }}
               >
                 Login
+                <CircularProgress />
               </Button>
             </form>
           </div>
