@@ -7,6 +7,8 @@ import { Card, TextField, Button, CircularProgress } from "@material-ui/core";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 
+import { useLogin } from "../context";
+
 const schema = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
@@ -15,6 +17,7 @@ const schema = Joi.object({
 }).options({ stripUnknown: true });
 
 const Login = (props) => {
+  const { state, login } = useLogin();
   const {
     handleSubmit,
     register,
@@ -22,8 +25,11 @@ const Login = (props) => {
   } = useForm({
     resolver: joiResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  const onSubmit = (data) => {
+    login(data.email, data.password);
+    //console.log(data);
+  };
+  //console.log(state, "state");
   return (
     <>
       <Head>
@@ -69,8 +75,11 @@ const Login = (props) => {
                 fullWidth
                 style={{ marginTop: 25 }}
               >
-                Login
-                <CircularProgress />
+                {state?.loading ? (
+                  <CircularProgress color="secondary" />
+                ) : (
+                  "Login"
+                )}
               </Button>
             </form>
           </div>

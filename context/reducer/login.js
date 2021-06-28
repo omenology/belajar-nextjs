@@ -7,7 +7,7 @@ import {
 export const initialStateLogin = {
   isLogin: false,
   token: null,
-  loading,
+  loading: false,
   error: false,
 };
 export const reducerLogin = (state, action) => {
