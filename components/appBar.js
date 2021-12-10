@@ -14,8 +14,8 @@ import {
   Menu as MenuIcon,
   Search as SearchIcon,
   AccountCircle,
-  Notifications as NotificationsIcon,
   MoreVert as MoreIcon,
+  Message as MessageIcon,
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -128,7 +128,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -144,9 +144,9 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+        <IconButton aria-label="show new message" color="inherit">
+          <Badge badgeContent={true ? "!" : null} color="secondary">
+            <MessageIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -196,9 +196,9 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+            <IconButton aria-label="show new message" color="inherit">
+              <Badge badgeContent={true ? "!" : null} color="secondary">
+                <MessageIcon />
               </Badge>
             </IconButton>
             <IconButton
